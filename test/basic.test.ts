@@ -12,11 +12,12 @@ test('pbdf2', async () => {
 })
 
 test('encrypt data', async () => {
-	const data = 'test'
+	const data =
+		'The correct way is to generate a random salt during encryption (as it already happens) and then pass this salt to the decrypting side. Like the IV, the salt is not secret and is usually concatenated with the ciphertext, e.g. salt|iv|ciphertext. By the way, a separator is not necessary because both sides can perform the separation based on th'
 	const encrypted = await aesEncrypt(data, '121212')
 	console.log(encrypted)
 	const decrypted = await aesDecrypt(encrypted, '121212')
-	expect(decrypted).toBe('test')
+	expect(decrypted).toBe(data)
 })
 
 test('decrypt data from dart', async () => {

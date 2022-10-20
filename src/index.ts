@@ -21,14 +21,12 @@ export async function aesEncrypt(data: string, password: string) {
 		key.subarray(0, 32),
 		iv,
 	)
-	let encryptedContent = encryptTool.update(data, 'utf8', 'base64')
-	encryptedContent += encryptTool.final('base64')
-	console.log(encryptedContent)
-
+	let content = encryptTool.update(data, 'ascii', 'base64')
+	content += encryptTool.final('base64')
 	const packaged = Buffer.concat([
 		iv,
 		salt,
-		Buffer.from(encryptedContent, 'base64'),
+		Buffer.from(content, 'base64'),
 	])
 	return packaged.toString('base64')
 }
@@ -37,19 +35,15 @@ export async function aesDecrypt(data: string, password: string) {
 	const unpackaged = Buffer.from(data, 'base64')
 	const iv = unpackaged.subarray(0, 16)
 	const salt = unpackaged.subarray(16, 32)
-	const input = unpackaged.subarray(32)
+	const input = unpackaged.subarray(32, data.length)
 	const key = await pbkdf2({ password, salt })
 	const decryptTool = crypto.createDecipheriv(
 		'aes-256-cbc',
 		key.subarray(0, 32),
 		iv,
 	)
-	decryptTool.update(
-		input.toString('base64'),
-		'base64',
-		'utf8',
-	)
-	return decryptTool.final('utf8')
+	const result = decryptTool.update(input.toString('base64'), 'base64', 'ascii')
+	return result + decryptTool.final('ascii')
 }
 
 type Pbkdf2Input = {

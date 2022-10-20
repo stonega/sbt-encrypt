@@ -1,6 +1,6 @@
 {
-	"name": "aes_js",
-	"version": "0.1.0",
+	"name": "crypto-aes-js",
+	"version": "0.1.1",
 	"type": "module",
 	"description": "Aes encrypt and decrypt",
 	"main": "dist/index.cjs",
@@ -29,6 +29,7 @@
 	"devDependencies": {
 		"@sachinraja/eslint-config": "0.1.1",
 		"@types/node": "18.7.14",
+		"dprint": "^0.32.1",
 		"eslint": "8.23.0",
 		"husky": "8.0.1",
 		"nano-staged": "0.8.0",
@@ -56,8 +57,5 @@
 		"splitting": true,
 		"clean": true
 	},
-	"packageManager": "pnpm@7.11.0",
-	"dependencies": {
-		"dprint": "^0.32.1"
-	}
+	"packageManager": "pnpm@7.11.0"
 }
