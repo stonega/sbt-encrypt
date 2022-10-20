@@ -1,8 +1,8 @@
 {
-	"name": "ts-lib-starter",
-	"version": "0.0.0",
+	"name": "aes_js",
+	"version": "0.1.0",
 	"type": "module",
-	"description": "boilerplate for your next TypeScript library",
+	"description": "Aes encrypt and decrypt",
 	"main": "dist/index.cjs",
 	"exports": {
 		"./package.json": "./package.json",
@@ -29,7 +29,6 @@
 	"devDependencies": {
 		"@sachinraja/eslint-config": "0.1.1",
 		"@types/node": "18.7.14",
-		"dprint": "0.31.1",
 		"eslint": "8.23.0",
 		"husky": "8.0.1",
 		"nano-staged": "0.8.0",
@@ -57,5 +56,8 @@
 		"splitting": true,
 		"clean": true
 	},
-	"packageManager": "pnpm@7.11.0"
+	"packageManager": "pnpm@7.11.0",
+	"dependencies": {
+		"dprint": "^0.32.1"
+	}
 }
