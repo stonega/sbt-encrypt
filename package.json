@@ -1,6 +1,6 @@
 {
-	"name": "crypto-aes-js",
-	"version": "0.1.1",
+	"name": "sbt-encrypt",
+	"version": "0.2.8",
 	"type": "module",
 	"description": "Aes encrypt and decrypt",
 	"main": "dist/index.cjs",
@@ -57,5 +57,10 @@
 		"splitting": true,
 		"clean": true
 	},
-	"packageManager": "pnpm@7.11.0"
+	"packageManager": "pnpm@7.11.0",
+	"dependencies": {
+		"@types/argon2-browser": "^1.18.1",
+		"argon2-browser": "^1.18.0",
+		"ts-chacha20": "^1.2.0"
+	}
 }
