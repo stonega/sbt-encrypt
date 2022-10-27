@@ -1,30 +1,28 @@
-import argon from 'argon2-browser'
-import crypto from 'node:crypto'
+import { argon2d } from 'hash-wasm'
+import randomBytes from 'randombytes'
 import { Chacha20 } from 'ts-chacha20'
 
 export async function argon2({ password, salt }: Argon2Input): Promise<Buffer> {
-	const result = await argon.hash({
-		pass: password,
-		salt,
-		hashLen: 32,
-		time: 2,
-		mem: 32,
+	const result = await argon2d({
+		password,
+		salt, // salt is a buffer containing random bytes
 		parallelism: 1,
-		type: argon.ArgonType.Argon2d,
+		iterations: 2,
+		memorySize: 32, // use 512KB memory
+		hashLength: 32, // output size = 32 bytes
+		outputType: 'hex', // return standard encoded string containing parameters needed to verify the key
 	})
-	return Buffer.from(result.hash)
+	return Buffer.from(result, 'hex')
 }
 
 function generateRandom(length = 16) {
-	return Uint8Array.from(crypto.randomBytes(length))
+	return Uint8Array.from(randomBytes(length))
 }
 
 export async function encrypt(data: string, password: string) {
 	const salt = generateRandom(12)
 	const key = await argon2({ password, salt })
-	const encrypt = new Chacha20(key, salt).encrypt(
-		Buffer.from(data, 'utf8'),
-	)
+	const encrypt = new Chacha20(key, salt).encrypt(Buffer.from(data, 'utf8'))
 	const packaged = Buffer.from([...salt, ...encrypt])
 	return packaged.toString('base64')
 }

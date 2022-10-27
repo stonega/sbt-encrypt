@@ -1,6 +1,6 @@
 {
 	"name": "sbt-encrypt",
-	"version": "0.2.8",
+	"version": "0.3.0",
 	"type": "module",
 	"description": "Aes encrypt and decrypt",
 	"main": "dist/index.cjs",
@@ -59,8 +59,9 @@
 	},
 	"packageManager": "pnpm@7.11.0",
 	"dependencies": {
-		"@types/argon2-browser": "^1.18.1",
-		"argon2-browser": "^1.18.0",
+		"@types/randombytes": "^2.0.0",
+		"hash-wasm": "^4.9.0",
+		"randombytes": "^2.1.0",
 		"ts-chacha20": "^1.2.0"
 	}
 }
