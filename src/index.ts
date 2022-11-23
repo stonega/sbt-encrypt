@@ -1,4 +1,5 @@
-import { argon2d } from 'hash-wasm'
+// @ts-expect-error import
+import { argon2d } from 'hash-wasm/dist/argon2.umd.min.js'
 import randomBytes from 'randombytes'
 import { Chacha20 } from 'ts-chacha20'
 
